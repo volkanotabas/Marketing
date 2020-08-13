@@ -1,6 +1,5 @@
-
 window.svo = window.svo || {};
-window.svo.svorootdomain = "x.com";//Buraya sitenin root domaini yazılmalıdır.
+window.svo.svorootdomain = "x.com";//Write here to website domain.
 
 svo.setCookie = function(cname, cvalue, exdays) {
 	var d = new Date();
@@ -83,7 +82,7 @@ if (window.svo_url_params.hasOwnProperty("utm_content")) {
 }
 
 
-//UTM değerine göre kaynak bilgisini mapleme yaptım. Mapping sonucunda eğer utm değeri varsa reklama, geçmiyorsa direct, organic veya referrera yazacak şekilde yönlendirdim.
+//Mapping for the UTM parameter. If there exist UTM in the URL it's ads, if not it will be direct, organic or referral
 function svoutmmapping() {
 	if (window.svo_utm_medium_value !== null && window.svo_utm_medium_value.length > 0) {
 		var svo_utm_url_medium = window.svo_utm_medium_value;
@@ -112,7 +111,5 @@ if (svo_org_source_exist == false || svo_url_params.hasOwnProperty("utm_source")
 } else {
 	svo_org_source_value = window.svo.getCookie("svo_org_source");
 };
-
-
 
 

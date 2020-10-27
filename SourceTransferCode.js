@@ -104,7 +104,7 @@ var svo_org_source_value = null;
 var svo_org_source_exist = window.svo.checkCookie("svo_org_source");
 
 
-//If there is no source cookie, then its landing page. We should set a new source cookie. Or if there is utm_source or tl param in the url we should update the cookie.
+//If there is no source cookie, then its landing page. We should set a new source cookie. Or if there is utm_source or utm param in the url we should update the cookie.
 if (svo_org_source_exist == false || svo_url_params.hasOwnProperty("utm_source") == true || svo_url_params.hasOwnProperty("utm_medium") == true) {
 	svo_org_source_value = svoutmmapping();
 	window.svo.setCookie("svo_org_source", svo_org_source_value);

@@ -1,5 +1,5 @@
 <script>
-  
+
 //    _
 //   | |
 //   | |__  _   _ _ __   ___
@@ -27,7 +27,7 @@ hype = {
 	asciilogo: "  _                      \n | |                     \n | |__  _   _ _ __   ___ \n | '_ \\| | | | '_ \\ / _ \\\n | | | | |_| | |_) |  __/\n |_| |_|\\__, | .__/ \\___|\n         __/ | |         \n        |___/|_|         "
 };
 
-hype.isObjectEmpty = function (obj) {
+hype.isObjectEmpty = function(obj) {
 	for (var prop in obj) {
 		if (Object.prototype.hasOwnProperty.call(obj, prop)) {
 			return false;
@@ -36,7 +36,7 @@ hype.isObjectEmpty = function (obj) {
 	return true;
 };
 
-hype.cleanObjectValues = function (o) {
+hype.cleanObjectValues = function(o) {
 	var newobj = {};
 
 	for (var k in o) {
@@ -74,8 +74,7 @@ hype.cleanObjectValues = function (o) {
 
 };
 
-
-window.hype.addObjectValue = function (o, n, v) {
+window.hype.addObjectValue = function(o, n, v) {
 
 	if (hype.what.call(o) == "[object Object]") {
 
@@ -111,7 +110,7 @@ window.hype.addObjectValue = function (o, n, v) {
 
 };
 
-window.hype.isDataLayerLoaded = function () {
+window.hype.isDataLayerLoaded = function() {
 
 	if (window.hasOwnProperty("dataLayer") == true) {
 		for (var i = 0, len = window.dataLayer.length; i < len; i++) {
@@ -159,14 +158,13 @@ window.hype.getDataLayerVariable = function(k,ind) {
 	if (found_values_list.length == 0){
 		return null
 	}else{
-		return found_values_list[found_values_list.length-1-ind];
+		return found_values_list[found_values_list.length-1-ind];	
 	}
 
-
+	
 };
-
 //Datalayerdan veri çekmek için
-window.hype.getDataLayerIndexByEvent = function (e) {
+window.hype.getDataLayerIndexByEvent = function(e) {
 
 	var returnedkey = -1;
 
@@ -179,6 +177,8 @@ window.hype.getDataLayerIndexByEvent = function (e) {
 				}
 
 			};
+
+
 		};
 	}
 
@@ -186,7 +186,7 @@ window.hype.getDataLayerIndexByEvent = function (e) {
 };
 
 // Log fonksiyonlar Başlangıç //
-hype.logger.isActive = function () {
+hype.logger.isActive = function() {
 	if (Storage) {
 		if (localStorage.getItem("hypeLogger") === true) {
 			return true;
@@ -196,7 +196,7 @@ hype.logger.isActive = function () {
 	}
 };
 
-hype.logger.activate = function () {
+hype.logger.activate = function() {
 	if (Storage) {
 		localStorage.setItem("hypeLogger", true);
 		if (confirm("Hype logger aktifleştirildi, sayfayı yenileyim mi?")) {
@@ -205,7 +205,7 @@ hype.logger.activate = function () {
 	}
 };
 
-hype.logger.stop = function () {
+hype.logger.stop = function() {
 	if (Storage) {
 		localStorage.setItem("hypeLogger", false);
 		if (confirm("Hype logger kapatıldı, sayfayı yenileyim mi?")) {
@@ -214,20 +214,20 @@ hype.logger.stop = function () {
 	}
 };
 
-hype.logger.info = function (e) {
+hype.logger.info = function(e) {
 	if (localStorage.getItem("hypeLogger") == "true") {
 		if (hype.loggerstarted === false) {
-			hype.logger.info(hype.asciilogo);
+			console.log(hype.asciilogo);
 			hype.loggerstarted = true;
 		}
 		console.info("[HYPE Bilgi]: " + e);
 	}
 };
 
-hype.logger.warn = function (e) {
+hype.logger.warn = function(e) {
 	if (localStorage.getItem("hypeLogger") == "true") {
 		if (hype.loggerstarted === false) {
-			hype.logger.info(hype.asciilogo);
+			console.log(hype.asciilogo);
 			hype.loggerstarted = true;
 		}
 		console.warn("[HYPE Uyarı]: " + e);
@@ -235,7 +235,7 @@ hype.logger.warn = function (e) {
 
 };
 
-hype.logger.group = function () {
+hype.logger.group = function() {
 	if (localStorage.getItem("hypeLogger") == "true") {
 		if (hype.logger.groupOpened === false) {
 			console.group();
@@ -245,7 +245,7 @@ hype.logger.group = function () {
 	}
 };
 
-hype.logger.groupEnd = function () {
+hype.logger.groupEnd = function() {
 	if (localStorage.getItem("hypeLogger") == "true") {
 		console.groupEnd();
 		hype.logger.groupOpened = false;
@@ -253,25 +253,25 @@ hype.logger.groupEnd = function () {
 };
 // Log fonksiyonlar Bitiş //
 
-window.hype.checkifloaded = function (ifade, fonk, cyclelimit, maxwaitlimit, slot) {
+window.hype.checkifloaded = function(ifade, fonk, cyclelimit, maxwaitlimit, slot) {
 
 	var loaded = false;
 
-	if (typeof (window.hype.checkerSlot) == "undefined") {
+	if (typeof(window.hype.checkerSlot) == "undefined") {
 		window.hype.checkerSlot = [];
 	};
 
 	var slotarray = window.hype.checkerSlot;
 
-	if (typeof (slot) !== "number") {
+	if (typeof(slot) !== "number") {
 		slot = slotarray.length;
 		slotarray[slotarray.length] = 0;
 	};
 
 	var cyclebeklemeayari = cyclelimit || 100; //Her kontrolden sonra kaç ms bekleyelim
-	var maxbeklemeayari = maxwaitlimit || 50; //Maksimum kaç saniye bekleyelim
+	var maxbeklemeayari = maxwaitlimit ||  50; //Maksimum kaç saniye bekleyelim
 
-	setTimeout(function () {
+	setTimeout(function() {
 		if (window.eval(ifade) === false && slotarray[slot] < (maxbeklemeayari * 1000 / cyclebeklemeayari) && loaded === false) {
 			hype.logger.info(ifade + " ifadesi true dönmedi, " + cyclelimit + "ms bekliyorum.");
 			slotarray[slot]++;
@@ -286,22 +286,21 @@ window.hype.checkifloaded = function (ifade, fonk, cyclelimit, maxwaitlimit, slo
 				hype.logger.info("ifade " + ((slotarray[slot] + 1) * 50 / 1000) + " saniyede bulundu, fonksiyonu calistiriyorum");
 				loaded = true;
 				fonk();
-
 			}
 		}
 	}, cyclebeklemeayari);
 };
 
 // silenebilir
-hype.treatAsUTC = function (date) {
+hype.treatAsUTC = function(date) {
 	var result = new Date(date);
 	result.setMinutes(result.getMinutes() - result.getTimezoneOffset());
 	return result;
 };
 
-window.hype.dateIsBetween = function (theDate, firstDate, secondDate) {
+window.hype.dateIsBetween = function(theDate, firstDate, secondDate) {
 
-	if (typeof (theDate) == "undefined") {
+	if (typeof(theDate) == "undefined") {
 		return false;
 	}
 
@@ -376,7 +375,7 @@ hype.removeCookie = function (cname) {
 	document.cookie = cname + "=; " + expires;
 }
 
-hype.toFixed = function (value, precision) {
+hype.toFixed = function(value, precision) {
 	var precision = precision || 0,
 		power = Math.pow(10, precision),
 		absValue = Math.abs(Math.round(value * power)),
@@ -391,7 +390,7 @@ hype.toFixed = function (value, precision) {
 	return result;
 };
 
-window.hype.isInCampSaleDate = function (tarih1, tarih2) {
+window.hype.isInCampSaleDate = function(tarih1, tarih2) {
 
 	var today_ms = new Date();
 	var date1_ms = new Date(tarih1);
@@ -409,7 +408,7 @@ window.hype.isInCampSaleDate = function (tarih1, tarih2) {
 
 };
 
-window.hype.isInCampSaleDate2 = function (tarih1) {
+window.hype.isInCampSaleDate2 = function(tarih1) {
 
 	var date1 = new Date();
 	var pattern = /(\d{2})\-(\d{2})-(\d{4})/;
@@ -425,17 +424,17 @@ window.hype.isInCampSaleDate2 = function (tarih1) {
 
 	if (10 < diffDays) {
 		return true;
-		// hype.logger.info(true);
+		// console.log(true);
 	} else {
 		return false;
-		// hype.logger.info(false);
+		// console.log(false);
 	}
 };
 
 //Bu tarih şu 2 tarihin arasında mı?
-window.hype.dateIsBetween = function (theDate, firstDate, secondDate) {
+window.hype.dateIsBetween = function(theDate, firstDate, secondDate) {
 
-	if (typeof (theDate) == "undefined") {
+	if (typeof(theDate) == "undefined") {
 		return false;
 	}
 
@@ -466,7 +465,7 @@ window.hype.dateIsBetween = function (theDate, firstDate, secondDate) {
 
 };
 
-hype.titleChange = function (options) {
+hype.titleChange = function(options) {
 	titleName = options.titleName || "HYPE";
 	// favicon = options.favicon || "";
 	session = options.session || 0;
@@ -476,7 +475,7 @@ hype.titleChange = function (options) {
 			window.document.title = titleName;
 		}
 		window.fakeCookie = 0;
-		window.onbeforeunload = function (e) {
+		window.onbeforeunload = function(e) {
 			localStorage.removeItem("sessionTimeout");
 		};
 		if (localStorage.getItem("sessionTimeout")) {
@@ -488,7 +487,7 @@ hype.titleChange = function (options) {
 		} else {
 			var countdown = session * 60 * 1000;
 		}
-		var timerId = setInterval(function () {
+		var timerId = setInterval(function() {
 			countdown -= 1000;
 			var min = Math.floor(countdown / (60 * 1000));
 			//var sec = Math.floor(countdown - (min * 60 * 1000));  // wrong
@@ -517,44 +516,44 @@ hype.titleChange = function (options) {
 }
 
 //Modal yaratma
-hype.modal = function (options) {
-	if (options == undefined) {
-		options = {}
-	}
-	var className = options.className || "",
-		idName = options.idName || "",
-		width = options.width || "50vw",
-		height = options.height || "500px",
-		left = options.left || "calc(50% - 25vw)",
-		right = options.right || "auto",
-		top = options.top || "calc(50% - 250px)",
-		bottom = options.bottom || "auto",
-		background = options.background || "#fff",
-		padding = options.padding || "25px",
-		position = options.position || "fixed",
-		display = options.display || "block",
-		closeImg = options.closeImg || "https://hypeistanbul.com/img/close.jpg",
-		html = options.html || "";
+hype.modal = function(options) {
+  if (options == undefined) {
+    options = {}
+  }
+  var className = options.className || "",
+  idName = options.idName || "",
+  width = options.width || "50vw",
+  height = options.height || "500px",
+  left = options.left || "calc(50% - 25vw)",
+  right = options.right || "auto",
+  top = options.top || "calc(50% - 250px)",
+  bottom = options.bottom || "auto",
+  background = options.background || "#fff",
+  padding = options.padding || "25px",
+  position = options.position || "fixed",
+  display = options.display || "block",
+  closeImg = options.closeImg || "https://hypeistanbul.com/img/close.jpg",
+  html = options.html || "";
 
-	var hypeStyle = '<style class="hypeModalStyle">';
-	hypeStyle += '.hypeModal {width:' + width + '; height:' + height + '; left:' + left + '; right:' + right + '; top:' + top + '; bottom:' + bottom + '; background:' + background + '; padding:' + padding + '; position:' + position + '; z-index: 9999; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; display:' + display + ';} .hypeModalBlocker {width:100%; height:100vh; position:' + position + '; left:0; top:0; z-index: 9990; background:rgba(0,0,0,0.7);  display:' + display + ';} .hypeClose {width:40px; height:40px; position:absolute; right:-20px; top:-20px; background:url(' + closeImg + ') no-repeat center center; background-size:100%;}';
-	hypeStyle += '</style>';
-	document.head.insertAdjacentHTML("beforeend", hypeStyle);
-	// beforebegin <div>afterbegin - foo - beforeend</div> afterend
+  var hypeStyle = '<style class="hypeModalStyle">';
+  hypeStyle += '.hypeModal {width:'+width+'; height:'+height+'; left:'+left+'; right:'+right+'; top:'+top+'; bottom:'+bottom+'; background:'+background+'; padding:'+padding+'; position:'+position+'; z-index: 9999; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; display:'+display+';} .hypeModalBlocker {width:100%; height:100vh; position:'+position+'; left:0; top:0; z-index: 9990; background:rgba(0,0,0,0.7);  display:'+display+';} .hypeClose {width:40px; height:40px; position:absolute; right:-20px; top:-20px; background:url('+closeImg+') no-repeat center center; background-size:100%;}';
+  hypeStyle += '</style>';
+  document.head.insertAdjacentHTML("beforeend",hypeStyle);
+  // beforebegin <div>afterbegin - foo - beforeend</div> afterend
 
-	var hypeHtml = '<div class="hypeModal ' + className + '" id="' + idName + '"> <a href="javascript:;" class="hypeClose"></a> <div class="hypeModalContent"> ' + html + ' </div>  </div>';
-	document.querySelector("body").insertAdjacentHTML("beforeend", hypeHtml);
+  var hypeHtml = '<div class="hypeModal '+className+'" id="'+idName+'"> <a href="javascript:;" class="hypeClose"></a> <div class="hypeModalContent"> '+html+' </div>  </div>';
+  document.querySelector("body").insertAdjacentHTML("beforeend",hypeHtml);
 
 	if (document.querySelectorAll(".hypeModalBlocker").length == 0) {
 		var hypeHtml = '<div class="hypeModalBlocker"> </div>';
-		document.querySelector("body").insertAdjacentHTML("beforeend", hypeHtml);
-	} else {
+		document.querySelector("body").insertAdjacentHTML("beforeend",hypeHtml);
+	}else {
 		document.querySelector(".hypeModalBlocker").style.display = "block";
 	}
 
 	if (document.querySelectorAll(".hypeClose").length !== 0) {
 		for (var i = 0; i < document.querySelectorAll(".hypeClose").length; i++) {
-			document.querySelectorAll(".hypeClose")[i].addEventListener("click", function () {
+			document.querySelectorAll(".hypeClose")[i].addEventListener("click", function() {
 				hype.modal.hide();
 			});
 		}
@@ -562,7 +561,7 @@ hype.modal = function (options) {
 
 	if (document.querySelectorAll(".hypeModalBlocker").length !== 0) {
 		for (var i = 0; i < document.querySelectorAll(".hypeModalBlocker").length; i++) {
-			document.querySelectorAll(".hypeModalBlocker")[i].addEventListener("click", function () {
+			document.querySelectorAll(".hypeModalBlocker")[i].addEventListener("click", function() {
 				hype.modal.hide();
 			});
 		}
@@ -570,7 +569,7 @@ hype.modal = function (options) {
 };
 
 // modal kapatma
-hype.modal.hide = function (selectorName) {
+hype.modal.hide = function(selectorName) {
 	var hypeSelector = selectorName || ".hypeModal";
 	var hypeLength = document.querySelectorAll(hypeSelector).length;
 	if (document.querySelectorAll(".hypeModalBlocker").length !== 0) {
@@ -584,7 +583,7 @@ hype.modal.hide = function (selectorName) {
 }
 
 // modal açma
-hype.modal.show = function (selectorName) {
+hype.modal.show = function(selectorName) {
 	var hypeSelector = selectorName || ".hypeModal";
 	var hypeLength = document.querySelectorAll(hypeSelector).length;
 	if (document.querySelectorAll(".hypeModalBlocker").length !== 0) {
@@ -597,65 +596,36 @@ hype.modal.show = function (selectorName) {
 	}
 }
 
-hype.sessionStorageContain = function (query) {
-  var i, results = [];
-  for (i in sessionStorage) {
-    if (sessionStorage.hasOwnProperty(i)) {
-      if (i.match(query) || (!query && typeof i === 'string')) {
-        value = JSON.parse(sessionStorage.getItem(i));
-        results.push({key:i,val:value});
-      }
-    }
-  }
-  return results;
-}
-
-hype.localStorageContain = function (query) {
-  var i, results = [];
-  for (i in localStorage) {
-    if (localStorage.hasOwnProperty(i)) {
-      if (i.match(query) || (!query && typeof i === 'string')) {
-        value = JSON.parse(localStorage.getItem(i));
-        results.push({key:i,val:value});
-      }
-    }
-  }
-  return results;
-}
-
-
 // exit intent
-hype.exitIntent = function (options, func) {
+hype.exitIntent = function(options,func) {
 	if (options == undefined) {
-		options = {}
-	}
+    options = {}
+  }
 	var cookie = options.cookie || "1"; // default cookie atar // 1 cookie var demek, 0 cookie yok demek
 
 	if (typeof func !== "function") {
-		var func = function () {
+		var func = function() {
 			hype.logger.warn("Herhangi bir fonksiyon yazılması lazım!");
 		}
-	} else {
+	}else {
 		var func = func;
 	}
 
-	document.addEventListener("mouseleave", function (e) {
-		if (e.clientY < 0) {
+	document.addEventListener("mouseleave", function(e){
+		if( e.clientY < 0 ){
 			if (cookie == "1") {
 				if (hype.checkCookie("hype-exit") !== true) {
-					hype.setCookie("hype-exit", true);
-					cookieStatus = false;
-					func();
+						hype.setCookie("hype-exit",true);
+						cookieStatus = false;
+						func();
 				}
-			} else {
+			}else {
 				func();
 			}
 		}
 	}, false);
 }
 
-
-//
 // hype.tab = function(options) {
 // 	if (options == undefined) {
 // 		options = {}
@@ -673,7 +643,7 @@ hype.exitIntent = function (options, func) {
 // 	for (var i = 0; i < checks.length; i++) {
 // 		document.querySelectorAll(".tab-links > li")[i].classList.add("hypeTabList--"+i);
 // 		document.querySelector(".hypeTabList--"+i).addEventListener("click", function() {
-// 			hype.logger.info("1");
+// 			console.log("1");
 // 			document.querySelectorAll(".tab")[0].classList.add("hypeFadeIn");
 // 			// document.querySelectorAll(".tab")[0].classList.add("hypeTabContent");
 // 		});
@@ -689,83 +659,18 @@ hype.exitIntent = function (options, func) {
 //     return document[selectorType](selector);
 // };
 
-hype.inputFilter = function(textbox, inputFilter, hvalue) {
-	if (inputFilter == "number") {
-		inputFilter = function(value) { return /^\d*$/.test(value)};
-	}else if (inputFilter == "text") {
-		inputFilter = function(value) {return /^[a-z]*$/i.test(value)};
-	}else if (inputFilter == "limit") {
-		inputFilter = function(value) { return /^\d*$/.test(value) && (value === "" || parseInt(value) <= hvalue);};
-	}
-  ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
-    textbox.addEventListener(event, function() {
-      if (inputFilter(this.value)) {
-        this.oldValue = this.value;
-        this.oldSelectionStart = this.selectionStart;
-        this.oldSelectionEnd = this.selectionEnd;
-      } else if (this.hasOwnProperty("oldValue")) {
-        this.value = this.oldValue;
-        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
-      }
-    });
-  });
-}
-
-
-hype.insertAfter = function (el, referenceNode) {
-	referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
-}
-
-hype.insertBefore = function (el, referenceNode) {
-	referenceNode.parentNode.insertBefore(el, referenceNode);
-}
-
-// example
 // append
-hype.append = function (options) {
+hype.append = function(options) {
 	if (options == undefined) {
 		options = {}
 	}
 	var selectorName = options.selectorName || "body",
-		position = options.position || "beforeend";
-	html = options.html || "";
-	document.querySelector(selectorName).insertAdjacentHTML(position, html);
+			position = options.position || "beforeend";
+			html = options.html || "";
+	document.querySelector(selectorName).insertAdjacentHTML(position,html);
 	// beforebegin <div>afterbegin - foo - beforeend</div> afterend
 }
-
-
-hype.abtest = function (cookiename, testname, testnumber, fonk) {
-	if (hype.getCookie(cookiename) == 0) {
-		dataLayer.push({
-			'event': 'GAEvent',
-			'eventCategory': 'Testing',
-			'eventAction': testname,
-			'eventLabel': 'Test ' + testnumber + ': Original'
-		});
-
-	} else {
-		dataLayer.push({
-			'event': 'GAEvent',
-			'eventCategory': 'Testing',
-			'eventAction': testname,
-			'eventLabel': 'Test ' + testnumber + ': Variation 1'
-		});
-		fonk();
-	}
-};
-
-// device kontrolü
-hype.isMobile = function () {
-	var isMobile = false; //initiate as false
-	// device detection
-	if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent) ||
-		/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(navigator.userAgent.substr(0, 4))) {
-		return isMobile = true;
-	} else {
-		return isMobile = false;
-
-	}
-}
+  
 
 // click function
 hype.click = function (selector, func) {
@@ -814,79 +719,6 @@ hype.keydown = function (selector, func) {
 		element.addEventListener("keydown", func);
 	});
 }
-// show function
-hype.show = function (selector) {
-	document.querySelectorAll(selector).forEach(function (element) {
-		element.style.display = "block";
-	});
-}
-// addclass function
-hype.addclass = function (selector, className) {
-	document.querySelectorAll(selector).forEach(function (element) {
-		element.classList.add(className);
-	});
-}
-// removeclass function
-hype.removeclass = function (selector, className) {
-	document.querySelectorAll(selector).forEach(function (element) {
-		if (element.classList.contains(className)) {
-			element.classList.remove(className);
-		}
-	});
-}
-// hide function
-hype.hide = function (selector) {
-	document.querySelectorAll(selector).forEach(function (element) {
-		element.style.display = "none";
-	});
-}
-// show function
-hype.show = function (selector) {
-	document.querySelectorAll(selector).forEach(function (element) {
-		if (element.style.display == "none") {
-			element.style.display = "";
-		}
-	});
-}
-
-hype.whichDevice = function() {
-	var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
-      // Windows Phone must come first because its UA also contains "Android"
-    if (/windows phone/i.test(userAgent)) {
-        return "Windows Phone";
-    }
-
-    if (/android/i.test(userAgent)) {
-        return "Android";
-    }
-
-    // iOS detection from: http://stackoverflow.com/a/9039885/177710
-    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        return "iOS";
-    }
-
-    return "unknown";
-}
-
-// getAttribute function
-//hype.getattribute(".carousel-item.carousel-active","data-id")
-hype.getattribute = function (selector, attr) {
-	var element = document.querySelector(selector);
-	element.getAttribute(attr);
-}
-// getAttribute function
-//hype.getattribute(".carousel-item.carousel-active","data-id")
-hype.setattribute = function (selector, attr, value) {
-	var element = document.querySelector(selector);
-	element.setAttribute(attr, value);
-}
-// parent function
-//hype.parent(".carousel-item.carousel-active")
-hype.parent = function (selector) {
-	var element = document.querySelector(selector);
-	return element.parentNode;
-}
 // selectAll function
 //hype.selectAll(".div");
 hype.selectAll = function (selector) {
@@ -906,6 +738,15 @@ hype.screenwidth = function () {
 		y = w.innerHeight || e.clientHeight || g.clientHeight;
 	return x;
 }
+  
+hype.insertAfter = function (el, referenceNode) {
+	referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
+}
+
+hype.insertBefore = function (el, referenceNode) {
+	referenceNode.parentNode.insertBefore(el, referenceNode);
+}
+  
 // ajaxget function
 hype.ajaxget = function (url, func) {
 
@@ -928,19 +769,14 @@ hype.ajaxget = function (url, func) {
 // ajaxpost function
 hype.ajaxpost = function (url, body, type, func) {
 
-	if (typeof (type) == "function") {
-		func = type;
-		type = "url";
-	}
-
 	var hypexhttp = new XMLHttpRequest();
 
 	hypexhttp.open("POST", url, true);
 
-	if (type == "url" || type == "URL") {
+	if (type = "url") {
 		hypexhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-	} else if (type == "json" || type == "JSON") {
+	} else if (type = "json") {
 		hypexhttp.setRequestHeader("Content-type", "application/json");
 	}
 
@@ -957,12 +793,12 @@ hype.ajaxpost = function (url, body, type, func) {
 	};
 
 }
-// encode64 function
-hype.encode64=function (string) {
+
+hype.encode64=function (string) { 
 	 return btoa(string);
 }
 // decode64 function
-hype.decode64=function (key) {
+hype.decode64=function (key) { 
 	return atob(key);
 }
 //getUrlParameter - Bu fonksiyon parametreli bir sayfada çalıştırılmalıdır.
@@ -980,44 +816,62 @@ hype.getUrlParameter = function(sParam) {
         }
     }
 };
+hype.abtest = function(cookiename, testname, testnumber, fonk) {
+	if (hype.getCookie(cookiename) == 0) {
+		dataLayer.push({
+			'event': 'GAEvent',
+			'eventCategory': 'Testing',
+			'eventAction': testname,
+			'eventLabel': 'Test ' + testnumber + ': Original'
+		});
 
-hype.phoneMask = function(hypeSelector) {
-  document.querySelector(hypeSelector).onkeyup = function(e) {
-    if (e.keyCode == 37 || e.keyCode == 40 || e.keyCode == 39 || e.keyCode == 38) {
-
-    } else {
-      var hypeText = document.querySelector(hypeSelector).value;
-      if (document.querySelector(hypeSelector).selectionStart == 0 || document.querySelector(hypeSelector).selectionStart == 1) {
-        var val = document.querySelector(hypeSelector).value;
-        var reg = /^0|1|2|3|4|6|7|8|9/gi;
-        if (val.match(reg)) {
-          document.querySelector(hypeSelector).value = val.replace(reg, '');
-        }
+	} else {
+		dataLayer.push({
+			'event': 'GAEvent',
+			'eventCategory': 'Testing',
+			'eventAction': testname,
+			'eventLabel': 'Test ' + testnumber + ': Variation 1'
+		});
+		fonk();
+	}
+};
+  
+hype.inputFilter = function(textbox, inputFilter, hvalue) {
+	if (inputFilter == "number") {
+		inputFilter = function(value) { return /^\d*$/.test(value)};
+	}else if (inputFilter == "text") {
+		inputFilter = function(value) {return /^[a-z]*$/i.test(value)};
+	}else if (inputFilter == "limit") {
+		inputFilter = function(value) { return /^\d*$/.test(value) && (value === "" || parseInt(value) <= hvalue);};
+	}
+  ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
+    textbox.addEventListener(event, function() {
+      if (inputFilter(this.value)) {
+        this.oldValue = this.value;
+        this.oldSelectionStart = this.selectionStart;
+        this.oldSelectionEnd = this.selectionEnd;
+      } else if (this.hasOwnProperty("oldValue")) {
+        this.value = this.oldValue;
+        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
       }
-      if (hypeText.indexOf("05") == -1) {
-        hypeText = "05";
-        document.querySelector(hypeSelector).value = hypeText;
-      }
-      if (e.keyCode == 8) {
-        if (hypeText.length < 2) {
-          document.querySelector(hypeSelector).value = "05";
-        }
-      }
-    }
-  };
-  if (typeof hype.inputFilter == "function") {
-    hype.inputFilter(document.querySelector(hypeSelector), "number");
-  }
+    });
+  });
 }
 
-//appendchild function
-hype.appendChild=function(createElementSelector,createChildNodeSelector,positionSelector) {
-	var node = document.createElement(createElementSelector);
-	var childnode = document.createTextNode(createChildNodeSelector);
-	node.appendChild(childnode);
-	document.querySelector(positionSelector).appendChild(node);
-  }
-hype.addListenFuncList = function (e, c) {
+// device kontrolü
+hype.isMobile = function() {
+	var isMobile = false; //initiate as false
+	// device detection
+	if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent) ||
+		/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(navigator.userAgent.substr(0, 4))) {
+		return isMobile = true;
+	} else {
+		return isMobile = false;
+
+	}
+}
+
+hype.addListenFuncList = function(e, c) {
 
 	hype.listenedFunctions = hype.listenedFunctions || {};
 	if (hype.listenedFunctions.hasOwnProperty(e) == true) {
@@ -1028,13 +882,13 @@ hype.addListenFuncList = function (e, c) {
 
 };
 
-window.hype.executeListenedEvent = function (e) {
+window.hype.executeListenedEvent = function(e) {
 
 	if (e == "" || e == "undefined" || e == "null") {
 		return
 	}
 
-	window.hj = window.hj || function () {
+	window.hj = window.hj || function() {
 		(hj.q = hj.q || []).push(arguments)
 	};
 	hj('trigger', e);
@@ -1055,7 +909,7 @@ window.hype.executeListenedEvent = function (e) {
 	}
 }
 
-window.hype.isThisFlightTransfer = function () {
+window.hype.isThisFlightTransfer = function() {
 
 	if (hype.getDataLayerIndexByEvent("ecAddToCart") !== -1) {
 
@@ -1076,11 +930,12 @@ window.hype.isThisFlightTransfer = function () {
 	}
 
 }
+hype.isDataLayerLoaded();
 
+  
 
 //sendAnalyticsData("Video","Play","Hero Video");
-window.hype.sendAnalyticsData = function (c, a, l) {
-
+window.hype.sendAnalyticsData = function(c, a, l) {
 	window.dataLayer = window.dataLayer || [];
 	window.dataLayer.push({
 		"event": "GAEvent",
@@ -1091,6 +946,150 @@ window.hype.sendAnalyticsData = function (c, a, l) {
 
 }
 
-hype.isDataLayerLoaded();  
-   
+
+window.hype.hypeListenedInputs = [];
+window.hype.hypeListenedInputsEmpty = [];
+
+window.hypeSelectElement = function (selector) {
+	return document.querySelector(selector);
+}
+window.hypeSendAnalyticsData = function (c, a, l) {
+	// console.log("data");
+	window.dataLayer = window.dataLayer || [];
+	window.dataLayer.push({
+		"event": "GAEvent",
+		"eventCategory": c,
+		"eventAction": a,
+		"eventLabel": l
+	});
+}
+
+window.hypeBlur = function (selector, func) {
+	// console.log("11");
+	$(selector).blur(func);
+	// document.querySelectorAll(selector).forEach(function (element) {
+	// 	element.addEventListener("blur", func);
+	// });
+}
+
+window.hypeChange = function (selector, func) {
+	$(selector).change(func);
+	// document.querySelectorAll(selector).forEach(function (element) {
+	// 	element.addEventListener("change", func);
+	// });
+}
+
+    hype.InputAnalyzer = function (p, s, n) {
+
+        var placeholder = "";
+        var elem = hype.select(p + " " + s);
+
+        if (elem !== null) {
+
+            var execfunc = function () {
+                if (hype.hypeListenedInputs.indexOf(p + " " + s) == -1) {
+
+                    hype.hypeListenedInputs.push(p + " " + s);
+
+                    if (hype.hypeListenedInputs[0] == p + " " + s) {
+                        hype.sendAnalyticsData("Micro Funnel", n, placeholder + " - Dolu Geçti - İlk Bunu Doldurdu");
+
+                    } else {
+                        hype.sendAnalyticsData("Micro Funnel", n, placeholder + " - Dolu Geçti");
+                    }
+
+                    //hype.logger.log(s + " has changed");
+
+
+                } else {
+
+                    hype.sendAnalyticsData("Micro Funnel", n, placeholder + " - Tekrar Doldurdu");
+
+
+                }
+            }
+
+            if (elem.tagName == "SELECT") {
+
+                var labelelem = hype.select("[for='" + s.replace("#", "") + "']");
+
+                if (labelelem !== null) {
+                    placeholder = labelelem.innerText.trim();
+                }
+
+                if (p.indexOf("general-") > -1) {
+                    var elem3 = elem.parentElement.querySelector("label");
+                    if (elem3 !== null) {
+                        placeholder = elem3.innerText.trim();
+                    } else {
+                        var elem4 = elem.parentElement.parentElement.querySelector("label");
+                        if (elem4 !== null) {
+                            placeholder = elem4.innerText.trim();
+                        }
+                    }
+
+
+                }
+                //console.log("[for='" + s2 + "']");
+                //console.log(placeholder);
+
+                window.hype.blur(s, function (a) {
+                    window.setTimeout(function () {
+                        if (this.value !== "") {
+                            //console.log(s + " değişti!!")
+                            execfunc();
+                        }
+                    }, 200);
+
+                });
+
+            } else if (elem.tagName == "INPUT") {
+
+                if (elem.attributes.hasOwnProperty("placeholder")) {
+                    placeholder = elem.attributes.placeholder.value;
+                }
+
+                if (p.indexOf("general-") > -1) {
+                    var elem3 = elem.parentElement.querySelector("label");
+                    if (elem3 !== null) {
+                        placeholder = elem3.innerText.trim();
+                    }
+
+                }
+
+                if (s.match(/.*Billing$/) !== null) {
+                    placeholder = placeholder + " (Fatura)";
+                }
+
+                window.hype.change(s, function (a) {
+                    execfunc();
+                });
+
+            }
+
+
+
+            /*
+            window.hype.blur(s, function(a) {
+    
+    
+                if (window.hype.hypeListenedInputsEmpty.indexOf(s) == -1) {
+                    if (this.value == "") {
+                        hype.sendAnalyticsData("Micro Funnel", n, placeholder + " - Boş Geçti");
+    
+                        hype.hypeListenedInputsEmpty.push(s);
+                    }
+                }
+    
+            });
+            */
+
+        }
+
+    };
+
+
+
+//
+
 </script>
